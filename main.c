@@ -1,8 +1,9 @@
 #include "ft_printf/ft_printf.h"
 #include "push_swap.h"
 #include "leacks_cheker_ex.c"
+#include <stdio.h>
 
-t_node	*ft_nodenew(int value)
+t_node	*ft_new_node(int value)
 {
 	t_node	*node;
 
@@ -11,37 +12,36 @@ t_node	*ft_nodenew(int value)
 		return (NULL);
 	node->value = value;
 	node->next = NULL;
+	node->previous = NULL;
 	return (node);
 }
 
-t_node	*ft_lastnode(t_node **first_node)
+t_node	*ft_last_node(t_node **first_node)
 {
-
 	t_node *current_node;
 
 	current_node = *first_node;
-
 	while (current_node->next != NULL)
+	{
 		current_node = current_node->next;
-
-	//ft_printf("Voici le pointeur du dernier maillon : %p\n", current_node);
-
+	}
 	return current_node;
-
 }
 
-// ATTENTION il faudrait verifier que *
-void	ft_addnode(t_node **first_node, t_node *new_node)
+void	ft_add_node(t_node **first_node, t_node *new_node)
 {
 	t_node	*last_node;
 
-	last_node = ft_lastnode(first_node);
+	last_node = ft_last_node(first_node);
 	if (first_node != NULL)
 	{
 		if (*first_node == NULL)
 			*first_node = new_node;
 		if (last_node != NULL)
+		{
 			last_node->next = new_node;
+			new_node->previous = last_node;
+		}
 	}
 }
 
@@ -52,18 +52,25 @@ t_node	*ft_create_stack(int *tab, int size_tab)
 	t_node	*first_node;
 
 	size_tab--;
-	first_node = ft_nodenew(tab[size_tab]);
+	first_node = ft_new_node(tab[size_tab]);
 	size_tab--;
-	while (size_tab > 0)
+	while (size_tab >= 0)
 	{
-		current_node = ft_nodenew(tab[size_tab]);
-		ft_addnode(&first_node, current_node);
+		current_node = ft_new_node(tab[size_tab]);
+		ft_add_node(&first_node, current_node);
 		size_tab--;
 	}
 	return	(first_node);
 }
 
-void	*ft_destruct_stack(t_node **first_node)
+void	ft_destruct_node(t_node *node)
+{
+	node->previous = NULL;	
+	node->next = NULL;
+	free(node);
+}
+
+void	ft_destruct_stack(t_node **first_node)
 {
 	t_node	*current_node;
 	t_node	*next_node;
@@ -73,15 +80,18 @@ void	*ft_destruct_stack(t_node **first_node)
 	while (current_node->next != NULL)
 	{
 		next_node = current_node->next;
-		current_node->next = NULL;
-		free(current_node);
+		ft_destruct_node(current_node);
 		current_node = next_node;
 		next_node = NULL;
 	}
 	free(current_node);
-	return current_node;
+
 }
 
+void	ft_display_node(t_node	*node)
+{
+	ft_printf("[%p] {value = %d | previous = %p |next = %p}\n", node, node->value, node->previous, node->next);
+}
 
 void	ft_display_lst(t_node **first_node)
 {
@@ -92,40 +102,101 @@ void	ft_display_lst(t_node **first_node)
 	count = 0;
 	while (current_node->next != NULL)
 	{
-		ft_printf("node %d : {value = %d | next = %p}\n", count, current_node->value, current_node->next);
+		ft_printf("Index = %d : ", count);
+		ft_display_node(current_node);
 		current_node = current_node->next;
 		count++;
 	}
-	ft_printf("node %d : {value = %d | next = %p}\n", count, current_node->value, current_node->next);
+	ft_printf("Index = %d : ", count);
+	ft_display_node(current_node);
 }
 
-/*
+
+
 void	ft_swap(t_node **first_node)
 {
 
 	t_node	*last_node;
-	t_node	
+	t_node	*penultimate_node;
+	t_node	*second_penultimate_node;
 
-	last_node = ft_lastnode(first_node);
+	t_node	*previous;
+
+	last_node = ft_last_node(first_node);
+	penultimate_node = last_node->previous;
+	second_penultimate_node = penultimate_node->previous;
+
+	previous = penultimate_node->previous;
+	last_node->next = penultimate_node;
+
+	penultimate_node->previous = last_node;
+	penultimate_node->next = NULL;
+	last_node->previous = previous;
+
+	second_penultimate_node->next = last_node;
+
+}
+
+void	ft_reverse(t_node **first_node)
+{
+	t_node	*last_node;
+	t_node	*penultimate_node;
 
 
+	last_node = ft_last_node(first_node);
+	penultimate_node = last_node->previous;
 
-}*/
+	last_node->next = *first_node;
+	penultimate_node->next = NULL;
+	
+
+}
 
 int	main()
 {	
 
-	int		tab[5] = {0,1,2,3,4};
-	t_node	*node0 = ft_create_stack(tab, 5);
+	t_node	*node_test = ft_new_node(42);
+	ft_display_node(node_test);
 
+	//printf("*node_test = %p", *node_test);
+	//printf("(*node_test).next = %p", (*(*node_test).previous));
+
+
+	/*
+	int		tab[5] = {-10,1,2,3,4};
+	t_node	*node0 = ft_create_stack(tab, 5);
 	ft_display_lst(&node0);
 
+	ft_swap(&node0);
+	ft_printf("\n");
+
+	ft_display_lst(&node0);
+	*/
+	//ft_destruct_stack(&node0);
 
 
-	ft_destruct_stack(&node0);
+	//ft_display_lst(&node0);
+	/*
+	t_node	*node00 = ft_new_node(0);
+	t_node	*node01 = ft_new_node(1);
+	t_node	*node02 = ft_new_node(2);
+	t_node	*node03 = ft_new_node(3);
+
+	ft_add_node(&node00, node01);
+	ft_add_node(&node00, node02);
+	ft_add_node(&node00, node03);
 
 
-	check_leaks();
+	ft_destruct_node(&node00);
+	ft_destruct_node(&node01);
+	ft_destruct_node(&node02);
+	ft_destruct_node(&node03);
+	*/
+	//ft_destruct_stack(&node0);
+
+
+
+	//check_leaks();
 	return 0;
 }
 
