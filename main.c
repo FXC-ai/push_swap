@@ -44,7 +44,28 @@ void	ft_add_node(t_node **first_node, t_node *new_node)
 		}
 	}
 }
+/*
+void	ft_add_node_front(t_node **first_node, t_node *new_node)
+{
+	(*first_node)->previous = new_node;
+	new_node->next = *first_node;
+	first_node = new_node;
 
+
+}
+*/
+
+
+void	ft_add_node_front(t_node **ptr_first_node, t_node *node)
+{
+	if (ptr_first_node)
+	{
+		if (*ptr_first_node)
+			node->next = *ptr_first_node;
+			(*ptr_first_node)->previous = node;
+		*ptr_first_node = node;
+	}
+}
 
 t_node	*ft_create_stack(int *tab, int size_tab)
 {
@@ -65,9 +86,12 @@ t_node	*ft_create_stack(int *tab, int size_tab)
 
 void	ft_destruct_node(t_node *node)
 {
-	node->previous = NULL;	
-	node->next = NULL;
-	free(node);
+	if (node != NULL)
+	{
+		node->previous = NULL;	
+		node->next = NULL;
+		free(node);
+	}
 }
 
 void	ft_destruct_stack(t_node **first_node)
@@ -137,63 +161,39 @@ void	ft_swap(t_node **first_node)
 
 }
 
-void	ft_reverse(t_node **first_node)
+
+void	ft_reverse(t_node **ptr_first_node)
 {
 	t_node	*last_node;
 	t_node	*penultimate_node;
+	t_node	*first_node = *ptr_first_node;
 
-
-	last_node = ft_last_node(first_node);
 	penultimate_node = last_node->previous;
 
-	last_node->next = *first_node;
 	penultimate_node->next = NULL;
-	
-
+	last_node->previous = NULL;
+	ft_add_node_front(ptr_first_node, last_node);
 }
 
-int	main()
+void	ft_reverse_reverse()
+{
+
+	
+}
+
+int	main(void)
 {	
 
-	t_node	*node_test = ft_new_node(42);
-	ft_display_node(node_test);
-
-	//printf("*node_test = %p", *node_test);
-	//printf("(*node_test).next = %p", (*(*node_test).previous));
-
-
-	/*
-	int		tab[5] = {-10,1,2,3,4};
-	t_node	*node0 = ft_create_stack(tab, 5);
-	ft_display_lst(&node0);
-
-	ft_swap(&node0);
-	ft_printf("\n");
+	int tab[3] = {445,58,73};
+	t_node *node0 = ft_create_stack(tab, 3);
 
 	ft_display_lst(&node0);
-	*/
-	//ft_destruct_stack(&node0);
 
+	ft_reverse(&node0);
 
-	//ft_display_lst(&node0);
-	/*
-	t_node	*node00 = ft_new_node(0);
-	t_node	*node01 = ft_new_node(1);
-	t_node	*node02 = ft_new_node(2);
-	t_node	*node03 = ft_new_node(3);
+	printf("\n\n");
 
-	ft_add_node(&node00, node01);
-	ft_add_node(&node00, node02);
-	ft_add_node(&node00, node03);
-
-
-	ft_destruct_node(&node00);
-	ft_destruct_node(&node01);
-	ft_destruct_node(&node02);
-	ft_destruct_node(&node03);
-	*/
-	//ft_destruct_stack(&node0);
-
+	ft_display_lst(&node0);
 
 
 	//check_leaks();
