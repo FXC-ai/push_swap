@@ -1,7 +1,18 @@
 #include "ft_printf/ft_printf.h"
 #include "push_swap.h"
-#include "leacks_cheker_ex.c"
 #include <stdio.h>
+
+t_node	*ft_new_node(int value);
+void	ft_destruct_node(t_node *node);
+void	ft_display_node(t_node	*node);
+t_node	*ft_last_node(t_node **first_node);
+void	ft_add_node(t_node **first_node, t_node *new_node);
+t_node	*ft_create_lst(int *tab, int size_tab);
+void	ft_destruct_lst(t_node **first_node);
+void	ft_display_lst(t_node **first_node);
+void	ft_swap(t_node **first_node);
+void	ft_rotate(t_node **ptr_first_node);
+void	ft_reverse_rotate(t_node **ptr_first_node);
 
 t_node	*ft_new_node(int value)
 {
@@ -14,6 +25,21 @@ t_node	*ft_new_node(int value)
 	node->next = NULL;
 	node->previous = NULL;
 	return (node);
+}
+
+void	ft_destruct_node(t_node *node)
+{
+	if (node != NULL)
+	{
+		node->previous = NULL;	
+		node->next = NULL;
+		free(node);
+	}
+}
+
+void	ft_display_node(t_node	*node)
+{
+	ft_printf("[%p] {value = %d | previous = %p |next = %p}\n", node, node->value, node->previous, node->next);
 }
 
 t_node	*ft_last_node(t_node **first_node)
@@ -56,7 +82,7 @@ void	ft_add_node_front(t_node **ptr_first_node, t_node *node)
 	}
 }
 
-t_node	*ft_create_stack(int *tab, int size_tab)
+t_node	*ft_create_lst(int *tab, int size_tab)
 {
 	t_node	*current_node;
 	t_node	*first_node;
@@ -73,17 +99,7 @@ t_node	*ft_create_stack(int *tab, int size_tab)
 	return	(first_node);
 }
 
-void	ft_destruct_node(t_node *node)
-{
-	if (node != NULL)
-	{
-		node->previous = NULL;	
-		node->next = NULL;
-		free(node);
-	}
-}
-
-void	ft_destruct_stack(t_node **first_node)
+void	ft_destruct_lst(t_node **first_node)
 {
 	t_node	*current_node;
 	t_node	*next_node;
@@ -98,11 +114,6 @@ void	ft_destruct_stack(t_node **first_node)
 		next_node = NULL;
 	}
 	free(current_node);
-}
-
-void	ft_display_node(t_node	*node)
-{
-	ft_printf("[%p] {value = %d | previous = %p |next = %p}\n", node, node->value, node->previous, node->next);
 }
 
 void	ft_display_lst(t_node **first_node)
@@ -123,8 +134,6 @@ void	ft_display_lst(t_node **first_node)
 	ft_printf("Index = %d : ", count);
 	ft_display_node(current_node);
 }
-
-
 
 void	ft_swap(t_node **first_node)
 {
@@ -150,7 +159,6 @@ void	ft_swap(t_node **first_node)
 
 }
 
-
 void	ft_rotate(t_node **ptr_first_node)
 {
 	t_node	*last_node;
@@ -165,6 +173,7 @@ void	ft_rotate(t_node **ptr_first_node)
 	last_node->previous = NULL;
 	ft_add_node_front(ptr_first_node, last_node);
 }
+
 
 void	ft_reverse_rotate(t_node **ptr_first_node)
 {
@@ -184,33 +193,51 @@ void	ft_reverse_rotate(t_node **ptr_first_node)
 
 int	main(void)
 {	
-
-	//int tab[2] = {445,58};
-
 	t_node *node0 = ft_new_node(12);
+	t_node *node1 = ft_new_node(42);
+    int tab[9] = {78,42,24, 87, 44, 120, 950, 1001, -83};
+    t_node *node00;
 
-	printf("\n\n%lu\n\n", sizeof(t_node));
+    ft_add_node(&node0, node1);
 
-	free(node0);
-	//ft_display_node(node0);
+    node00 = ft_create_lst(tab, 9);
 
-	//ft_destruct_node(node0);
-
-	//t_node *node0 = ft_create_stack(tab, 2);
-
-	//ft_display_lst(&node0);
-
-	//ft_reverse_rotate(&node0);
-
-	//printf("\n");
-
-	//ft_display_lst(&node0);
+    
 
 
-	//ft_destruct_stack(&node0);
-	//check_leaks();
+
+    printf("\n\n----------------DISPLAY BEGIN----------------\n\n");
+
+	ft_display_node(node0);
+    printf("\n");
+
+    printf("SWAP TEST :\n");
+    ft_display_lst(&node00);
+    printf("\n");
+    ft_swap(&node00);
+    ft_display_lst(&node00);
+    printf("\n");
+    
+    printf("ROTATE TEST :\n");
+    ft_display_lst(&node00);
+    printf("\n");
+    ft_rotate(&node00);
+    ft_display_lst(&node00);
+    printf("\n");
+
+    printf("REVERSE ROTATE TEST :\n");
+    ft_display_lst(&node00);
+    printf("\n");
+    ft_reverse_rotate(&node00);
+    ft_display_lst(&node00);
+    printf("\n");
+
+
+    printf("\n\n----------------DISPLAY   END----------------\n\n");
+
+    ft_destruct_lst(&node00);
+    ft_destruct_node(node0);
+    ft_destruct_node(node1);
+
 	return 0;
 }
-
-
-
