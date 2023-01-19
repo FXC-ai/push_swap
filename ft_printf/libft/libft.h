@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:04:55 by fcoindre          #+#    #+#             */
-/*   Updated: 2022/11/07 17:18:09 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:53:39 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int		ft_atoi(const char	*str);
+long	ft_atoi(const char	*str);
 void	*ft_memset(void *b, int c, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *str);
