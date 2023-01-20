@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:24:44 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/20 16:58:50 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:35:15 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ long    *ft_args_management(int argc, char *argv[], int *args_valid)
 		tab_char = ft_set_args(tablen, argv);
 		*args_valid = ft_check_args(tablen, tab_char, &tab_long, (argc - 1));
 	}
-	if (*args_valid == 1)
-		write(2, "Error\n", 6);
+	//if (*args_valid == 1)
+	//	write(2, "Error\n", 6);
 	return tab_long;
 }
