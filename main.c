@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:15:14 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/21 15:28:47 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/21 19:09:57 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int *ft_convert_longtoint(int tablen, long *tab_long)
     while (i < tablen)
     {
         tab_int[i] = (int) tab_long[i];
-        //printf("%ld | %d\n", tab_long[i], tab_int[i]);
         i++;
     }
     free(tab_long);
@@ -49,6 +48,51 @@ int ft_sort_check(t_node **ptr_first_node)
     return (1);
 }
 
+void    ft_swap_in(t_node *node_min, t_node *node_max)
+{
+    t_node  *temp;
+    t_node  *before_min = node_min->previous;
+    t_node  *after_max = node_max->next;
+
+    before_min->next = node_max;
+    after_max->previous = node_min;
+
+    temp = ft_new_node(node_min->value);
+    temp->previous = node_min->previous;
+    temp->next = node_min->next;
+
+    node_min->previous = node_max;
+    node_min->next = node_max->next;
+
+    node_max->previous = temp->previous;
+    node_max->next = node_min;
+}
+
+void    ft_swap_begin(t_node **stack, t_node *node_min, t_node *node_max)
+{
+    printf("\n");
+    ft_display_node(node_min);
+    ft_display_node(node_max);
+    printf("\n");
+
+    t_node  *after_max;
+
+    after_max = node_max->next;
+    after_max->previous = node_min;
+
+    node_max->previous = NULL;
+    node_max->next = node_min;
+
+    node_min->previous = node_max;
+    node_min->next = after_max;
+    
+    stack = &node_max;
+    printf("\n");
+    ft_display_node(node_max);
+    ft_display_node(node_min);
+    printf("\n");
+
+}
 
 int main(int argc, char *argv[])
 {
@@ -88,56 +132,21 @@ int main(int argc, char *argv[])
         return (0);
     }
 
+    ft_display_lst(&stack1);
+    printf("\n");
+
+    t_node *node_min = stack1;
+    t_node *node_max = stack1->next;
     
 
+    ft_swap_begin(&stack1, node_min, node_max);
+    
     ft_display_lst(&stack1);
+    
     ft_destruct_lst(&stack1);
 
     printf("\n\n----------------DISPLAY   END----------------\n\n");
 
-    //printf("args_valid = %d", args_valid);
 
-    //printf("\n\n\n\n%ld\n\n\n", tab_long[0]);
-
-
-
-    /*
-    printf("\n\n\n\n%ld\n\n\n", tab_long[1]);
-    printf("\n\n\n\n%ld\n\n\n", tab_long[2]);
-    printf("\n\n\n\n%ld\n\n\n", tab_long[3]);
-    printf("\n\n\n\n%ld\n\n\n", tab_long[4]);
-    
-    
-	t_node *node0 = ft_new_node(12);
-	t_node *node1 = ft_new_node(42);
-    int tab[9] = {78,42,24, 87, 44, 120, 950, 1001, -83};
-    t_node *node00;
-    ft_add_node(&node0, node1);
-    node00 = ft_create_lst(tab, 9);
-	ft_display_node(node0);
-    printf("\n");
-    printf("SWAP TEST :\n");
-    ft_display_lst(&node00);
-    printf("\n");
-    ft_swap(&node00);
-    ft_display_lst(&node00);
-    printf("\n");
-    
-    printf("ROTATE TEST :\n");
-    ft_display_lst(&node00);
-    printf("\n");
-    ft_rotate(&node00);
-    ft_display_lst(&node00);
-    printf("\n");
-    printf("REVERSE ROTATE TEST :\n");
-    ft_display_lst(&node00);
-    printf("\n");
-    ft_reverse_rotate(&node00);
-    ft_display_lst(&node00);
-    printf("\n");
-    ft_destruct_lst(&node00);
-    ft_destruct_node(node0);
-    ft_destruct_node(node1);
-    */
     return 0;
 }
