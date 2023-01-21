@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:24:44 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/20 18:35:15 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/21 14:20:21 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,27 +88,25 @@ static int  ft_check_args(int tablen, char **tab_char, long **tab_long, int argc
 	return (0);
 }
 
-long    *ft_args_management(int argc, char *argv[], int *args_valid)
+long    *ft_args_management(int argc, char *argv[], int *args_valid, int *tablen)
 {
 	char    **tab_char;
-	int     tablen;
 	long    *tab_long;
 
 	tab_long = NULL;
-	tablen = 0;
 	if ((argc - 1) == 0)
 		*args_valid = -1;
 	else if ((argc - 1) == 1)
 	{
 		tab_char = ft_split(argv[1], ' ');
-		tablen = ft_tablen(tab_char);
-		*args_valid = ft_check_args(tablen, tab_char, &tab_long, (argc - 1));
+		*tablen = ft_tablen(tab_char);
+		*args_valid = ft_check_args(*tablen, tab_char, &tab_long, (argc - 1));
 	}
 	else
 	{
-		tablen = (argc - 1);
-		tab_char = ft_set_args(tablen, argv);
-		*args_valid = ft_check_args(tablen, tab_char, &tab_long, (argc - 1));
+		*tablen = (argc - 1);
+		tab_char = ft_set_args(*tablen, argv);
+		*args_valid = ft_check_args(*tablen, tab_char, &tab_long, (argc - 1));
 	}
 	//if (*args_valid == 1)
 	//	write(2, "Error\n", 6);

@@ -41,6 +41,6 @@ int		ft_check_args_number(int argc, char **args);
 int		ft_check_double(int argc, long *args);
 
 //fct_args_management_02
-long	*ft_args_management(int argc, char *argv[], int *args_valid);
+long	*ft_args_management(int argc, char *argv[], int *args_valid, int *tablen);
 
 #endif
