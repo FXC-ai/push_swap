@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:15:14 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/21 19:09:57 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/22 14:27:39 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int ft_sort_check(t_node **ptr_first_node)
     }
     return (1);
 }
-
+/*
 void    ft_swap_in(t_node *node_min, t_node *node_max)
 {
     t_node  *temp;
@@ -86,14 +86,14 @@ void    ft_swap_begin(t_node **stack, t_node *node_min, t_node *node_max)
     node_min->previous = node_max;
     node_min->next = after_max;
     
-    stack = &node_max;
+    *stack = node_max;
     printf("\n");
     ft_display_node(node_max);
     ft_display_node(node_min);
     printf("\n");
 
 }
-
+*/
 int main(int argc, char *argv[])
 {
 

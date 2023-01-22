@@ -1,0 +1,86 @@
+    printf("liste A : \n");
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    printf("liste B : \n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
+
+    ft_push_b(ptr_first_node_a, ptr_first_node_b);
+    printf("ACTION\n");
+
+    printf("liste A : \n");
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    printf("liste B : \n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
+
+    ft_push_b(ptr_first_node_a, ptr_first_node_b);
+    printf("ACTION\n");
+
+    printf("liste A : \n");
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    printf("liste B : \n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
+
+    ft_push_b(ptr_first_node_a, ptr_first_node_b);
+    printf("ACTION\n");
+
+    printf("liste A : \n");
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    printf("liste B : \n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
+
+    ft_push_b(ptr_first_node_a, ptr_first_node_b);
+    printf("ACTION\n");
+
+    printf("liste A : \n");
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    printf("liste B : \n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
+
+    ft_push_a(ptr_first_node_a, ptr_first_node_b);
+    printf("ACTION\n");
+
+    printf("liste A : \n");
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    printf("liste B : \n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
+
+    ft_push_a(ptr_first_node_a, ptr_first_node_b);
+    printf("ACTION\n");
+
+    printf("liste A : \n");
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    printf("liste B : \n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
+
+    ft_push_a(ptr_first_node_a, ptr_first_node_b);
+    printf("ACTION\n");
+
+    printf("liste A : \n");
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    printf("liste B : \n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
+
+    ft_push_a(ptr_first_node_a, ptr_first_node_b);
+    printf("ACTION\n");
+
+    printf("liste A : \n");
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    printf("liste B : \n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
