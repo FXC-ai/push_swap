@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 10:12:06 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/25 15:36:59 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:50:16 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -522,12 +522,12 @@ void    ft_sort_four_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
 
 void    ft_sort_five_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
 {
-    t_node  *element_to_insert;
+    int  ind_nod_to_insert;
 
     ft_push_b(ptr_first_node_a, ptr_first_node_b);
-    
     ft_sort_four_nodes(ptr_first_node_a, ptr_first_node_b);
 
+    ind_nod_to_insert = (ft_last_node(ptr_first_node_b))->ind;
 
 
     //element_to_add = *ptr_first_node_a;
