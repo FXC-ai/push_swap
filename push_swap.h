@@ -44,6 +44,7 @@ void    ft_sort_two_nodes(t_node **ptr_first_node);
 void    ft_sort_three_nodes(t_node **ptr_first_node_a);
 
 void    ft_sort_four_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
+void    ft_sort_five_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
 
 
 //fct_args_management_00

@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 10:12:06 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/24 21:19:24 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:36:59 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -489,19 +489,24 @@ void    ft_sort_three_nodes(t_node **ptr_first_node_a)
 
 void    ft_sort_four_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
 {
+    t_node *node_to_insert;
+
     ft_push_b(ptr_first_node_a, ptr_first_node_b);
     ft_sort_three_nodes(ptr_first_node_a);
-    if ((*ptr_first_node_b)->ind == 1)
+    node_to_insert = ft_last_node(ptr_first_node_b);
+    if (node_to_insert->ind < ft_last_node(ptr_first_node_a)->ind)
     {
         ft_push_a(ptr_first_node_a, ptr_first_node_b);
     }
-    else if ((*ptr_first_node_b)->ind == 2)
+    else if (node_to_insert->ind > ft_last_node(ptr_first_node_a)->ind
+            && node_to_insert->ind < ((ft_last_node(ptr_first_node_a))->previous)->ind)
     {   
         ft_rotate_a(ptr_first_node_a);
         ft_push_a(ptr_first_node_a, ptr_first_node_b);
         ft_reverse_rotate_a(ptr_first_node_a);
     }
-    else if ((*ptr_first_node_b)->ind == 3)
+    else if (node_to_insert->ind < (*ptr_first_node_a)->ind
+            && node_to_insert->ind > ((*ptr_first_node_a)->next)->ind)
     {
         ft_reverse_rotate_a(ptr_first_node_a);
         ft_push_a(ptr_first_node_a, ptr_first_node_b);
@@ -514,27 +519,37 @@ void    ft_sort_four_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
         ft_rotate_a(ptr_first_node_a);
     }
 }
-/*
+
 void    ft_sort_five_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
 {
+    t_node  *element_to_insert;
+
     ft_push_b(ptr_first_node_a, ptr_first_node_b);
-    ft_sort_four_nodes(ptr_first_node_a);
-
     
-    while ((*ptr_first_node_a)->ind != )
+    ft_sort_four_nodes(ptr_first_node_a, ptr_first_node_b);
+
+
+
+    //element_to_add = *ptr_first_node_a;
+    /*
+    while ((ft_last_node(ptr_first_node_a))->ind != ((element_to_add->ind) - 1))
     {
-
+        ft_rotate_a(ptr_first_node_a);
     }
-    
-
-
-
-    
+    */
+    //ft_push_a(ptr_first_node_a, ptr_first_node_b);
+    /*
+    while (ft_sort_check(ptr_first_node_a) == 0)
+    {
+        ft_reverse_rotate_a(ptr_first_node_a);
+    }*/
 }
-*/
+
 /*
 int main()
 {
+
+ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker -v $ARG
 
     t_node *first_node_b = NULL;
     t_node **ptr_first_node_b = &first_node_b;

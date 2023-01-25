@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:15:14 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/24 19:14:53 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:34:23 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,13 @@ int main(int argc, char *argv[])
     if (ft_sort_check(ptr_first_node_a) == 0)
     {
         ft_index_lst(ptr_first_node_a);
-    /*
+        
+        printf("---------Situation initiale--------\n");
         ft_display_lst(ptr_first_node_a);
         printf("\n");
         ft_display_lst(ptr_first_node_b);
         printf("\n");
-    */
+        
         if (ft_size_lst(ptr_first_node_a) == 3)
         {
             ft_sort_three_nodes(ptr_first_node_a);
@@ -82,15 +83,18 @@ int main(int argc, char *argv[])
         else if (ft_size_lst(ptr_first_node_a) == 4)
         {
             ft_sort_four_nodes(ptr_first_node_a, ptr_first_node_b);
-        }        
-
-    /*    
-        ft_display_lst(ptr_first_node_a);
-        printf("\n");
-        ft_display_lst(ptr_first_node_b);
-        printf("\n");
-     */   
+        }
+        else if (ft_size_lst(ptr_first_node_a) == 5)
+        {
+            ft_sort_five_nodes(ptr_first_node_a, ptr_first_node_b);
+        }
+                
     }
+    
+    ft_display_lst(ptr_first_node_a);
+    printf("\n");
+    ft_display_lst(ptr_first_node_b);
+    printf("\n");
     
     ft_destruct_lst(ptr_first_node_a);
 
