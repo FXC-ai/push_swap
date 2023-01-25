@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 10:12:06 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/25 15:50:16 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:52:55 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -522,13 +522,51 @@ void    ft_sort_four_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
 
 void    ft_sort_five_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
 {
-    int  ind_nod_to_insert;
+    int ind_nod_to_insert;
+    int max_r = 4;
+    int max_rr = 0;
+    t_node  *current_node;  
 
     ft_push_b(ptr_first_node_a, ptr_first_node_b);
     ft_sort_four_nodes(ptr_first_node_a, ptr_first_node_b);
 
     ind_nod_to_insert = (ft_last_node(ptr_first_node_b))->ind;
 
+    current_node = *ptr_first_node_a;
+    while (current_node != NULL)
+    {
+        if (ind_nod_to_insert < current_node->ind)
+        {
+            max_r--;
+            max_rr++;
+        }
+        current_node = current_node->next;
+    }
+
+    if (max_rr <= max_r)
+    {
+        while (max_rr > 0)
+        {
+            ft_reverse_rotate_a(ptr_first_node_a);
+            max_rr--;
+        }
+        ft_push_a(ptr_first_node_a, ptr_first_node_b);
+    }
+    else
+    {
+        while (max_r > 0)
+        {
+            ft_rotate_a(ptr_first_node_a);
+            max_r--;
+        }
+        ft_push_a(ptr_first_node_a, ptr_first_node_b);
+    }
+    
+    
+    
+    printf("max_r = %d min_rr = %d\n", max_r, max_rr);
+
+    
 
     //element_to_add = *ptr_first_node_a;
     /*
