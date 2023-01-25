@@ -1,31 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fct_chain_list_ind.c                               :+:      :+:    :+:   */
+/*   fct_chain_lst_ind.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 10:12:06 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/24 14:00:16 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/24 21:19:24 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "ft_printf/ft_printf.h"
-
-typedef struct s_node
-{
-	int				value;
-    int             ind;
-	struct s_node	*previous;
-	struct s_node	*next;
-} t_node;
-
-typedef struct s_stacks
-{
-	t_node	**a;
-	t_node	**b;
-} t_stacks;
+#include "push_swap.h"
 
 t_node	*ft_new_node(int value)
 {
@@ -242,22 +228,23 @@ void	ft_rotate_a(t_node **ptr_first_node)
     }
 }
 
-void	ft_reverse_rotate(t_node **ptr_first_node)
+void	ft_reverse_rotate_a(t_node **ptr_first_node_a)
 {
-	t_node	*first_node;
-	t_node	*second_node;
-	t_node	*last_node;
+	t_node	*first_node_a;
+	t_node	*second_node_a;
+	t_node	*last_node_a;
 
-	first_node = *ptr_first_node;
-	second_node = first_node->next;
-	last_node = ft_last_node(ptr_first_node);
+	first_node_a = *ptr_first_node_a;
+	second_node_a = first_node_a->next;
+	last_node_a = ft_last_node(ptr_first_node_a);
 
-    if (last_node != first_node)
+    if (last_node_a != first_node_a)
     {
-    	ft_add_node(ptr_first_node, first_node);
-    	first_node->next = NULL;
-    	second_node->previous = NULL;
-    	*ptr_first_node = second_node;
+    	ft_add_node(ptr_first_node_a, first_node_a);
+    	first_node_a->next = NULL;
+    	second_node_a->previous = NULL;
+    	*ptr_first_node_a = second_node_a;
+        write(1, "rra\n", 4);
     }
 }
 
@@ -315,6 +302,7 @@ void ft_push_b(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
             last_node_b->next = ft_lst_del_last(ptr_first_node_a);
             last_node_a->previous = last_node_b;
         }
+        write(1,"pb\n",3);
     }
 }
 
@@ -338,6 +326,7 @@ void ft_push_a(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
             last_node_a->next = ft_lst_del_last(ptr_first_node_b);
             last_node_b->previous = last_node_a;
         }
+        write(1,"pa\n",3);
     }
 }
 
@@ -348,7 +337,7 @@ int ft_sort_check(t_node **ptr_first_node)
     current_node = *ptr_first_node;
     while (current_node->next != NULL)
     {
-        if (current_node->value > (current_node->next)->value)
+        if (current_node->value < (current_node->next)->value)
         {
             return (0);
         }
@@ -452,56 +441,122 @@ void    ft_sort_two_nodes(t_node **ptr_first_node)
 
 void    ft_sort_three_nodes(t_node **ptr_first_node_a)
 {
-    t_node  *node0;
-    t_node  *node1;
-    t_node  *node2;
+    t_node  *bottom;
+    t_node  *mid;
+    t_node  *top;
 
-    node2 = ft_last_node(ptr_first_node_a);
-    node1 = node2->previous;
-    node0 = node1->previous;
+    top = ft_last_node(ptr_first_node_a);
+    mid = top->previous;
+    bottom = mid->previous;
 
-    if (node0 != NULL && node1 != NULL && node2 != NULL)
+    if (top != NULL && mid != NULL && bottom != NULL)
     {
-        if (node2->ind > node1->ind && node1->ind < node0->ind && node2->ind < node0->ind)
+        
+        if (top->ind > mid->ind       //2 1 3
+            && mid->ind < bottom->ind 
+            && bottom->ind > top->ind)
         {
             ft_swap_a(ptr_first_node_a);
         }
-        if (node2->ind > node1->ind && node1->ind < node0->ind && node2->ind > node0->ind)
+        if (top->ind > mid->ind        //T=3 M=1 B=2
+            && mid->ind < bottom->ind 
+            && bottom->ind < top->ind)
         {
             ft_rotate_a(ptr_first_node_a);
         }
-        
-
+        if (top->ind < mid->ind
+            && mid->ind > bottom->ind
+            && bottom->ind < top->ind) //T=2 M=3 B=1
+        {
+            ft_reverse_rotate_a(ptr_first_node_a);
+        }
+        if (top->ind > mid->ind    //T=3 M=2 B=1
+            && mid->ind > bottom->ind
+            && bottom->ind < top->ind)
+        {
+            ft_swap_a(ptr_first_node_a);
+            ft_reverse_rotate_a(ptr_first_node_a);
+        }
+        if (top->ind < mid->ind    //T=1 M=3 B=2
+            && mid->ind > bottom->ind
+            && bottom->ind > top->ind)
+        {
+            ft_swap_a(ptr_first_node_a);
+            ft_rotate_a(ptr_first_node_a);
+        }
     }
 }
 
+void    ft_sort_four_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
+{
+    ft_push_b(ptr_first_node_a, ptr_first_node_b);
+    ft_sort_three_nodes(ptr_first_node_a);
+    if ((*ptr_first_node_b)->ind == 1)
+    {
+        ft_push_a(ptr_first_node_a, ptr_first_node_b);
+    }
+    else if ((*ptr_first_node_b)->ind == 2)
+    {   
+        ft_rotate_a(ptr_first_node_a);
+        ft_push_a(ptr_first_node_a, ptr_first_node_b);
+        ft_reverse_rotate_a(ptr_first_node_a);
+    }
+    else if ((*ptr_first_node_b)->ind == 3)
+    {
+        ft_reverse_rotate_a(ptr_first_node_a);
+        ft_push_a(ptr_first_node_a, ptr_first_node_b);
+        ft_rotate_a(ptr_first_node_a);
+        ft_rotate_a(ptr_first_node_a);
+    }
+    else
+    {
+        ft_push_a(ptr_first_node_a, ptr_first_node_b);
+        ft_rotate_a(ptr_first_node_a);
+    }
+}
+/*
+void    ft_sort_five_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
+{
+    ft_push_b(ptr_first_node_a, ptr_first_node_b);
+    ft_sort_four_nodes(ptr_first_node_a);
 
+    
+    while ((*ptr_first_node_a)->ind != )
+    {
+
+    }
+    
+
+
+
+    
+}
+*/
+/*
 int main()
 {
-    int tab_int[3] = {20,10,30};
 
-    t_node *first_node_a = NULL;
-    t_node **ptr_first_node_a = &first_node_a;
-    first_node_a = ft_create_lst(tab_int, 3);
+    t_node *first_node_b = NULL;
+    t_node **ptr_first_node_b = &first_node_b;
 
-    //t_node *first_node_b = NULL;
-    //t_node **ptr_first_node_b = &first_node_b;
+    int tab[6] = {1,23,5,4,89,88888};
 
+    //t_node  *node_test = ft_new_node(14);
+    //ft_destruct_node(node_test);
+    first_node_b = ft_create_lst(tab, 6);
+
+    ft_destruct_lst(ptr_first_node_b);
     //t_node **ptr_first_node_b = &first_node_a;
     
     //printf("\n\n----------------DISPLAY BEGIN----------------\n\n");
 
-    //ft_display_lst(ptr_first_node_a);
     //printf("\n");
 
-    ft_index_lst(ptr_first_node_a);
-    ft_sort_three_nodes(ptr_first_node_a);
 
     //ft_display_lst(ptr_first_node_a);
 
 
     //printf("\n\n----------------DISPLAY   END----------------\n\n");
-    ft_destruct_lst(ptr_first_node_a);
     
     return 0;
-}
+}*/
