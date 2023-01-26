@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:15:14 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/25 18:40:32 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:50:34 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
     first_node_a = ft_create_lst(tab_int, tablen);
     free(tab_int);
 
-    //printf("sort = %d\n\n", ft_sort_check(ptr_first_node_a));
+
     
     if (ft_sort_check(ptr_first_node_a) == 0)
     {
@@ -95,8 +95,8 @@ int main(int argc, char *argv[])
     ft_display_lst(ptr_first_node_a);
     printf("\n");
     ft_display_lst(ptr_first_node_b);
-    printf("\n");*/
-    
+    printf("\n");
+    */
     ft_destruct_lst(ptr_first_node_a);
 
     return 0;

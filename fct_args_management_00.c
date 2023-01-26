@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:35:36 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/24 17:47:36 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:58:27 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,3 +208,4 @@ long    *ft_args_management(int argc, char *argv[], int *args_valid, int *tablen
 	//	write(2, "Error\n", 6);
 	return tab_long;
 }
+

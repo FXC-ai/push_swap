@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 10:12:06 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/25 18:42:44 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:46:04 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -491,99 +491,81 @@ void    ft_sort_four_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
 {
     t_node *node_to_insert;
 
-    ft_push_b(ptr_first_node_a, ptr_first_node_b);
-    ft_sort_three_nodes(ptr_first_node_a);
-    node_to_insert = ft_last_node(ptr_first_node_b);
-    if (node_to_insert->ind < ft_last_node(ptr_first_node_a)->ind)
-    {
-        ft_push_a(ptr_first_node_a, ptr_first_node_b);
-    }
-    else if (node_to_insert->ind > ft_last_node(ptr_first_node_a)->ind
-            && node_to_insert->ind < ((ft_last_node(ptr_first_node_a))->previous)->ind)
-    {   
-        ft_rotate_a(ptr_first_node_a);
-        ft_push_a(ptr_first_node_a, ptr_first_node_b);
-        ft_reverse_rotate_a(ptr_first_node_a);
-    }
-    else if (node_to_insert->ind < (*ptr_first_node_a)->ind
-            && node_to_insert->ind > ((*ptr_first_node_a)->next)->ind)
-    {
-        ft_reverse_rotate_a(ptr_first_node_a);
-        ft_push_a(ptr_first_node_a, ptr_first_node_b);
-        ft_rotate_a(ptr_first_node_a);
-        ft_rotate_a(ptr_first_node_a);
-    }
-    else
-    {
-        ft_push_a(ptr_first_node_a, ptr_first_node_b);
-        ft_rotate_a(ptr_first_node_a);
+    if (ft_sort_check(ptr_first_node_a) == 0)
+    {    
+        ft_push_b(ptr_first_node_a, ptr_first_node_b);
+        ft_sort_three_nodes(ptr_first_node_a);
+        node_to_insert = ft_last_node(ptr_first_node_b);
+
+        if (node_to_insert->ind < ft_last_node(ptr_first_node_a)->ind)
+        {
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+        }
+        else if (node_to_insert->ind > ft_last_node(ptr_first_node_a)->ind
+                && node_to_insert->ind < ((ft_last_node(ptr_first_node_a))->previous)->ind)
+        {   
+            ft_rotate_a(ptr_first_node_a);
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+            ft_reverse_rotate_a(ptr_first_node_a);
+        }
+        else if (node_to_insert->ind < (*ptr_first_node_a)->ind
+                && node_to_insert->ind > ((*ptr_first_node_a)->next)->ind)
+        {
+            ft_reverse_rotate_a(ptr_first_node_a);
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+            ft_rotate_a(ptr_first_node_a);
+            ft_rotate_a(ptr_first_node_a);
+        }
+        else
+        {
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+            ft_rotate_a(ptr_first_node_a);
+        }
     }
 }
 
 void    ft_sort_five_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
 {
-    int ind_nod_to_insert;
-    int max_r = 4;
-    int max_rr = 0;
-    t_node  *current_node;  
+    int pos_5;
+    t_node *current_node;
+    (void) ptr_first_node_b;
 
-    ft_push_b(ptr_first_node_a, ptr_first_node_b);
-    ft_sort_four_nodes(ptr_first_node_a, ptr_first_node_b);
-
-    ind_nod_to_insert = (ft_last_node(ptr_first_node_b))->ind;
-
+    pos_5 = 0;
     current_node = *ptr_first_node_a;
-    while (current_node != NULL)
+    if (ft_sort_check == 0)
     {
-        if (ind_nod_to_insert < current_node->ind)
+        while (current_node->ind != 5)
         {
-            max_r--;
-            max_rr++;
+            pos_5++;
+            current_node = current_node->next;
         }
-        current_node = current_node->next;
-    }
-
-    if (max_rr < 2)
-    {
-        while (max_rr > 0)
+        pos_5 = 4 - pos_5;
+        if (pos_5 <= 2)
         {
-            ft_reverse_rotate_a(ptr_first_node_a);
-            max_rr--;
+            while (pos_5 > 0)
+            {
+                ft_rotate_a(ptr_first_node_a);
+                pos_5--;
+            }
+            ft_push_b(ptr_first_node_a, ptr_first_node_b);
+            ft_sort_four_nodes(ptr_first_node_a, ptr_first_node_b);
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+            ft_rotate_a(ptr_first_node_a);
         }
-        ft_push_a(ptr_first_node_a, ptr_first_node_b);
-        while (ft_sort_check(ptr_first_node_a) == 0)
+        else
         {
+            pos_5 = 5 - pos_5;
+            while (pos_5 > 0)
+            {
+                ft_reverse_rotate_a(ptr_first_node_a);
+                pos_5--;
+            }
+            ft_push_b(ptr_first_node_a, ptr_first_node_b);
+            ft_sort_four_nodes(ptr_first_node_a, ptr_first_node_b);
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
             ft_rotate_a(ptr_first_node_a);
         }
     }
-    else
-    {
-        while (max_r > 0)
-        {
-            ft_rotate_a(ptr_first_node_a);
-            max_r--;
-        }
-        ft_push_a(ptr_first_node_a, ptr_first_node_b);
-        while (ft_sort_check(ptr_first_node_a) == 0)
-        {
-            ft_reverse_rotate_a(ptr_first_node_a);
-        }
-    }
-      
-
-    //element_to_add = *ptr_first_node_a;
-    /*
-    while ((ft_last_node(ptr_first_node_a))->ind != ((element_to_add->ind) - 1))
-    {
-        ft_rotate_a(ptr_first_node_a);
-    }
-    */
-    //ft_push_a(ptr_first_node_a, ptr_first_node_b);
-    /*
-    while (ft_sort_check(ptr_first_node_a) == 0)
-    {
-        ft_reverse_rotate_a(ptr_first_node_a);
-    }*/
 }
 
 /*
