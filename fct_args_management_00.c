@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:35:36 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/26 11:58:27 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:30:57 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int ft_is_number(char *arg)
 	int i;
 
 	i = 0;
-	if (arg[0] == '-')
+	if (arg[0] == '-' || arg[0] == '+')
 	{
 		i = 1;
 	}
@@ -208,4 +208,24 @@ long    *ft_args_management(int argc, char *argv[], int *args_valid, int *tablen
 	//	write(2, "Error\n", 6);
 	return tab_long;
 }
+/*
+int main(int argc, char *argv[])
+{
 
+    long    *tab_long;
+    int     args_valid;
+    int     tablen;
+    
+    tablen = 0;
+    tab_long = ft_args_management(argc, argv, &args_valid, &tablen);
+
+    if (args_valid == 1)
+    {
+		write(2, "Error\n", 6);
+        return (0);
+    }
+    else if (args_valid == -1 || tablen == 0)
+    {
+        return (0);
+    }
+}*/

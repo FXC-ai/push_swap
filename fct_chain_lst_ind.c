@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 10:12:06 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/26 11:46:04 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:14:48 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -532,7 +532,7 @@ void    ft_sort_five_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
 
     pos_5 = 0;
     current_node = *ptr_first_node_a;
-    if (ft_sort_check == 0)
+    if (ft_sort_check(ptr_first_node_a) == 0)
     {
         while (current_node->ind != 5)
         {
@@ -567,34 +567,26 @@ void    ft_sort_five_nodes(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
         }
     }
 }
-
 /*
-int main()
+int main(int argc, char *argv[])
 {
 
-ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker -v $ARG
-
-    t_node *first_node_b = NULL;
-    t_node **ptr_first_node_b = &first_node_b;
-
-    int tab[6] = {1,23,5,4,89,88888};
-
-    //t_node  *node_test = ft_new_node(14);
-    //ft_destruct_node(node_test);
-    first_node_b = ft_create_lst(tab, 6);
-
-    ft_destruct_lst(ptr_first_node_b);
-    //t_node **ptr_first_node_b = &first_node_a;
+    long    *tab_long;
+    int     args_valid;
+    int     *tab_int;
+    int     tablen;
     
-    //printf("\n\n----------------DISPLAY BEGIN----------------\n\n");
+    tablen = 0;
+    tab_long = ft_args_management(argc, argv, &args_valid, &tablen);
 
-    //printf("\n");
-
-
-    //ft_display_lst(ptr_first_node_a);
-
-
-    //printf("\n\n----------------DISPLAY   END----------------\n\n");
-    
-    return 0;
+    if (args_valid == 1)
+    {
+		write(2, "Error\n", 6);
+        return (0);
+    }
+    else if (args_valid == -1 || tablen == 0)
+    {
+        return (0);
+    }
+    tab_int = ft_convert_longtoint(tablen, tab_long);
 }*/
