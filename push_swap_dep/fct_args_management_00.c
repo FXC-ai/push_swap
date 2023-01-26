@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:35:36 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/26 14:19:20 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:50:32 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int ft_is_number(char *arg)
 	{
 		i = 1;
 	}
-	if (arg[i] == '\0')
+	if (ft_isdigit(arg[i]) == 0)
 	{
 		return (0);
 	}
@@ -200,6 +200,12 @@ long    *ft_args_management(int argc, char *argv[], int *args_valid, int *tablen
 	{
 		tab_char = ft_split(argv[1], ' ');
 		*tablen = ft_tablen(tab_char);
+		/*if (tablen == 0)
+		{
+			*args_valid = -1;
+			return tab_long;
+		}*/
+		
 		*args_valid = ft_check_args(*tablen, tab_char, &tab_long, (argc - 1));
 	}
 	else
