@@ -45,5 +45,6 @@ void	ft_reverse_rotate_a(t_node **ptr_first_node_a);
 void	ft_reverse_rotate_b(t_node **ptr_first_node_b);
 void ft_push_b(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
 void ft_push_a(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
+int *ft_convert_longtoint(long *tab_long, int tablen);
 
 #endif
