@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 10:12:06 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/26 12:14:48 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/29 15:56:43 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,11 +266,9 @@ t_node    *ft_lst_del_last(t_node **ptr_first_node)
     {
         return (NULL);
     }
-    else if (last_node->previous == NULL)
+    else if (last_node->previous == NULL && last_node->next == NULL)
     {
         *ptr_first_node = NULL;
-        last_node->previous = NULL;
-        last_node->next = NULL;
         return (last_node);
     }
     else
