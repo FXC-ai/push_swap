@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:25:18 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/29 17:32:19 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:20:36 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void	ft_add_node(t_node **ptr_first_node, t_node *new_node)
 	if (ptr_first_node != NULL)
 	{
 		if (*ptr_first_node == NULL)
+        {
 			*ptr_first_node = new_node;
+        }
 		if (last_node != NULL)
 		{
 			last_node->next = new_node;
@@ -202,11 +204,13 @@ t_node  *ft_lst_del_first(t_node **ptr_first_node)
 
 void	ft_add_node_front(t_node **ptr_first_node, t_node *node)
 {
-	if (ptr_first_node)
+	if (ptr_first_node != NULL)
 	{
-		if (*ptr_first_node)
+		if (*ptr_first_node != NULL)
+        {
 			node->next = *ptr_first_node;
-			(*ptr_first_node)->previous = node;
+        }
+		(*ptr_first_node)->previous = node;
 		*ptr_first_node = node;
 	}
 }
@@ -279,83 +283,82 @@ void	ft_rotate_b(t_node **ptr_first_node_b)
         write(1, "rb\n", 3);
     }
 }
-/*
+
 void	ft_reverse_rotate_a(t_node **ptr_first_node_a)
 {
 	t_node	*first_node_a;
 
-    if (*ptr_first_node_b != NULL && ft_size_lst(ptr_first_node_b) > 1)
+    if (*ptr_first_node_a != NULL && ft_size_lst(ptr_first_node_a) > 1)
     {
-        first_node_a = ft_del_fi
-    	ft_add_node(ptr_first_node_a, first_node_a);
-    	first_node_a->next = NULL;
-    	second_node_a->previous = NULL;
-    	*ptr_first_node_a = second_node_a;
+        first_node_a = ft_lst_del_first(ptr_first_node_a);
+        ft_add_node(ptr_first_node_a, first_node_a);
         write(1, "rra\n", 4);
     }
 }
-*/
+
+void	ft_reverse_rotate_b(t_node **ptr_first_node_b)
+{
+	t_node	*first_node_b;
+
+    if (*ptr_first_node_b != NULL && ft_size_lst(ptr_first_node_b) > 1)
+    {
+        first_node_b = ft_lst_del_first(ptr_first_node_b);
+        ft_add_node(ptr_first_node_b, first_node_b);
+        write(1, "rrb\n", 4);
+    }
+}
+
+void ft_push_b(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
+{
+    t_node  *last_node_a;
+
+    if (ptr_first_node_a != NULL && ptr_first_node_b != NULL && ft_size_lst(ptr_first_node_a) > 0)
+    {
+        last_node_a = ft_lst_del_last(ptr_first_node_a);
+        ft_add_node(ptr_first_node_b, last_node_a);
+        write(1,"pb\n",3);
+    }
+}
+
+void ft_push_a(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
+{
+    t_node  *last_node_b;
+
+    if (ptr_first_node_a != NULL && ptr_first_node_b != NULL && ft_size_lst(ptr_first_node_b) > 0)
+    {
+        last_node_b = ft_lst_del_last(ptr_first_node_b);
+        ft_add_node(ptr_first_node_a, last_node_b);
+        write(1,"pa\n",3);
+    }
+}
+
 
 int main()
 {
 
     int     tablen;
-    int     tab_int[3] = {12, 7889, -2154};
-    tablen = 3;
+    int     tab_int[4] = {45, -89, -887, 2};
+    tablen = 4;
 
     t_node *first_node_a = NULL;
     t_node **ptr_first_node_a = &first_node_a;
-    
-    first_node_a = ft_create_lst(tab_int, tablen);
 
-    ft_display_lst(ptr_first_node_a, "LISTE A");
-
-    ft_rotate_b(ptr_first_node_a);
-
-    ft_display_lst(ptr_first_node_a, "LISTE A");
-    
-    ft_destruct_lst(ptr_first_node_a);
-
-    /*
     t_node *first_node_b = NULL;
     t_node **ptr_first_node_b = &first_node_b;
-    */
     
-/*
-    
-    if (ft_sort_check(ptr_first_node_a) == 0)
-    {
-        ft_index_lst(ptr_first_node_a);
-        
-        printf("---------Situation initiale--------\n");
-        ft_display_lst(ptr_first_node_a);
-        printf("\n");
-        ft_display_lst(ptr_first_node_b);
-        printf("\n");
-        
+    first_node_a = ft_create_lst(tab_int, tablen);
+    first_node_b = ft_create_lst(tab_int, tablen);
 
-        if (ft_size_lst(ptr_first_node_a) == 3)
-        {
-            ft_sort_three_nodes(ptr_first_node_a);
-        }
-        else if (ft_size_lst(ptr_first_node_a) == 4)
-        {
-            ft_sort_four_nodes(ptr_first_node_a, ptr_first_node_b);
-        }
-        else if (ft_size_lst(ptr_first_node_a) == 5)
-        {
-            ft_sort_five_nodes(ptr_first_node_a, ptr_first_node_b);
-        }
-                
-    }
-    
-    ft_display_lst(ptr_first_node_a);
-    printf("\n");
-    ft_display_lst(ptr_first_node_b);
-    printf("\n");
+    ft_display_lst(ptr_first_node_a, "LISTE A");
+    ft_display_lst(ptr_first_node_b, "LISTE B");
+
+    ft_push_b(ptr_first_node_a, ptr_first_node_b);
+
+    ft_display_lst(ptr_first_node_a, "LISTE A");
+    ft_display_lst(ptr_first_node_b, "LISTE B");
     
     ft_destruct_lst(ptr_first_node_a);
-*/
+    ft_destruct_lst(ptr_first_node_b);
 
     return 0;
 }
