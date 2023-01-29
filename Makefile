@@ -1,6 +1,6 @@
 HEADIR  = includes
 
-SRCS 	= fct_args_management_00.c fct_chain_lst_ind.c main.c
+SRCS 	= args_management.c
 
 OBJS	= ${SRCS:.c=.o}
 

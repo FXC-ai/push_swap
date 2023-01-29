@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:35:36 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/26 15:50:32 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/01/29 14:32:26 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int ft_check_double(int argc, long *args)
 	}
 	return (1);
 }
+
 static void	ft_free_tabs(char **tab, int tablen, int argc)
 {
 	int	i;
