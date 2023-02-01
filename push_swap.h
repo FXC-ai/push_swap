@@ -46,5 +46,10 @@ void	ft_reverse_rotate_b(t_node **ptr_first_node_b);
 void ft_push_b(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
 void ft_push_a(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
 int *ft_convert_longtoint(long *tab_long, int tablen);
+int ft_check_is_sorted(t_node **ptr_first_node);
+void    ft_sort_two(t_node **ptr_first_node);
+void    ft_sort_three(t_node **ptr_first_node_a);
+void    ft_sort_four(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
+
 
 #endif

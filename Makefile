@@ -16,8 +16,8 @@ CFLAGS	= -Wall -Wextra -Werror -I${HEADIR}
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
-			make -C ft_printf
-			$(CC) $^ -Lft_printf -lftprintf -o $(NAME)
+			make -C libft
+			$(CC) $^ -Llibft -lft -o $(NAME)
 
 
 all:		${NAME}

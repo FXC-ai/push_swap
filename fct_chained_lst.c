@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:25:18 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/29 18:37:28 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:42:22 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,6 +329,122 @@ void ft_push_a(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
         last_node_b = ft_lst_del_last(ptr_first_node_b);
         ft_add_node(ptr_first_node_a, last_node_b);
         write(1,"pa\n",3);
+    }
+}
+
+int ft_check_is_sorted(t_node **ptr_first_node)
+{
+    t_node  *current_node;
+
+    current_node = *ptr_first_node;
+    while (current_node->next != NULL)
+    {
+        if (current_node->value < (current_node->next)->value)
+        {
+            return (0);
+        }
+        current_node = current_node->next;
+    }
+    return (1);
+}
+
+
+void    ft_sort_two(t_node **ptr_first_node)
+{
+    t_node  *node1 = ft_last_node(ptr_first_node);
+    t_node  *node0 = node1->previous;
+
+    if (node0 != NULL && node1 != NULL)
+    {
+        if (node0->value < node1->value)
+        {
+            ft_swap_a(ptr_first_node);
+        }
+    }
+}
+
+void    ft_sort_three(t_node **ptr_first_node_a)
+{
+    t_node  *bottom;
+    t_node  *mid;
+    t_node  *top;
+
+    top = ft_last_node(ptr_first_node_a);
+    mid = top->previous;
+    bottom = mid->previous;
+
+    if (top != NULL && mid != NULL && bottom != NULL)
+    {
+        
+        if (top->value > mid->value       //2 1 3
+            && mid->value < bottom->value 
+            && bottom->value > top->value)
+        {
+            ft_swap_a(ptr_first_node_a);
+        }
+        if (top->value > mid->value        //T=3 M=1 B=2
+            && mid->value < bottom->value 
+            && bottom->value < top->value)
+        {
+            ft_rotate_a(ptr_first_node_a);
+        }
+        if (top->value < mid->value
+            && mid->value > bottom->value
+            && bottom->value < top->value) //T=2 M=3 B=1
+        {
+            ft_reverse_rotate_a(ptr_first_node_a);
+        }
+        if (top->value > mid->value    //T=3 M=2 B=1
+            && mid->value > bottom->value
+            && bottom->value < top->value)
+        {
+            ft_swap_a(ptr_first_node_a);
+            ft_reverse_rotate_a(ptr_first_node_a);
+        }
+        if (top->value < mid->value    //T=1 M=3 B=2
+            && mid->value > bottom->value
+            && bottom->value > top->value)
+        {
+            ft_swap_a(ptr_first_node_a);
+            ft_rotate_a(ptr_first_node_a);
+        }
+    }
+}
+
+void    ft_sort_four(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
+{
+    t_node *node_to_insert;
+
+    if (ft_check_is_sorted(ptr_first_node_a) == 0)
+    {    
+        ft_push_b(ptr_first_node_a, ptr_first_node_b);
+        ft_sort_three(ptr_first_node_a);
+        node_to_insert = ft_last_node(ptr_first_node_b);
+
+        if (node_to_insert->ind < ft_last_node(ptr_first_node_a)->ind)
+        {
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+        }
+        else if (node_to_insert->ind > ft_last_node(ptr_first_node_a)->ind
+                && node_to_insert->ind < ((ft_last_node(ptr_first_node_a))->previous)->ind)
+        {   
+            ft_rotate_a(ptr_first_node_a);
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+            ft_reverse_rotate_a(ptr_first_node_a);
+        }
+        else if (node_to_insert->ind < (*ptr_first_node_a)->ind
+                && node_to_insert->ind > ((*ptr_first_node_a)->next)->ind)
+        {
+            ft_reverse_rotate_a(ptr_first_node_a);
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+            ft_rotate_a(ptr_first_node_a);
+            ft_rotate_a(ptr_first_node_a);
+        }
+        else
+        {
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+            ft_rotate_a(ptr_first_node_a);
+        }
     }
 }
 

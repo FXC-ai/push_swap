@@ -6,11 +6,57 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:19:41 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/29 18:39:20 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:46:43 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_sort_int_tab(int *tab, int size)
+{
+	int	i;
+	int	c;
+	int	check;
+
+	check = 0;
+	while (check < size)
+	{
+		i = 0;
+		while (i < (size - 1))
+		{
+			if (tab[i] > tab[i + 1])
+			{
+				c = tab[i];
+				tab[i] = tab[i + 1];
+				tab[i + 1] = c;
+			}	
+			i++;
+		}
+		check++;
+	}
+}
+
+void    ft_set_index_lst(t_node **ptr_first_node, int *tab_int, int tablen)
+{
+    int i;
+    t_node  *current_node;
+
+    i = 0;
+    current_node = *ptr_first_node;
+    while (i < tablen)
+    {
+        current_node = *ptr_first_node;
+        while (current_node != NULL)
+        {
+            if (current_node->value == tab_int[i])
+            {
+                current_node->ind = i;
+            }
+            current_node = current_node->next;
+        }
+        i++;
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -18,7 +64,11 @@ int main(int argc, char *argv[])
     long    *tab_long;
     int     tablen;
     char    *args;
-    int    *tab_int;
+    int     *tab_int;
+    t_node  *first_node_a;
+    t_node  *first_node_b;
+    t_node  **ptr_first_node_a;
+    t_node  **ptr_first_node_b;
 
     tab_int = NULL;
     args = NULL;
@@ -76,7 +126,44 @@ int main(int argc, char *argv[])
     tab_int = ft_convert_longtoint(tab_long, tablen);
     ft_free_tab_char(tab_char, tablen);
 
+    first_node_a = ft_create_lst(tab_int, tablen);
+    ptr_first_node_a = &first_node_a;
 
+	first_node_b = NULL;
+	ptr_first_node_b = &first_node_b;
+
+    ft_sort_int_tab(tab_int, tablen);
+
+	ft_set_index_lst(ptr_first_node_a, tab_int, tablen);
+
+    //ft_display_lst(ptr_first_node_a, "Liste A");
+
+
+	if (ft_check_is_sorted(ptr_first_node_a) == 1)
+	{
+        ft_destruct_lst(ptr_first_node_a);
+        free(tab_int);
+        return (0);
+    }
+    
+    if (tablen == 2)
+    {
+        ft_sort_two(ptr_first_node_a);
+    }
+    else if (tablen == 3)
+    {
+        ft_sort_three(ptr_first_node_a);
+    }
+    else if (tablen == 4)
+    {
+        ft_sort_four(ptr_first_node_a, ptr_first_node_b);
+    }
+    
+
+    //ft_display_lst(ptr_first_node_a, "Liste A :");
+
+
+    ft_destruct_lst(ptr_first_node_a);
     free(tab_int);
 
     return (0);
