@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:25:18 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/01 17:26:00 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:16:14 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -537,6 +537,8 @@ void    ft_sort_five(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
         }
     }
 }
+
+
 /*
 int main()
 {
