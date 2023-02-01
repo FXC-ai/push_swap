@@ -50,6 +50,9 @@ int ft_check_is_sorted(t_node **ptr_first_node);
 void    ft_sort_two(t_node **ptr_first_node);
 void    ft_sort_three(t_node **ptr_first_node_a);
 void    ft_sort_four(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
+void    ft_sort_five(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
+void	ft_sort_int_tab(int *tab, int size);
+void    ft_set_index_lst(t_node **ptr_first_node, int *tab_int, int tablen);
 
 
 #endif

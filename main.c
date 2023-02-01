@@ -6,57 +6,13 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:19:41 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/01 16:46:43 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:27:45 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sort_int_tab(int *tab, int size)
-{
-	int	i;
-	int	c;
-	int	check;
 
-	check = 0;
-	while (check < size)
-	{
-		i = 0;
-		while (i < (size - 1))
-		{
-			if (tab[i] > tab[i + 1])
-			{
-				c = tab[i];
-				tab[i] = tab[i + 1];
-				tab[i + 1] = c;
-			}	
-			i++;
-		}
-		check++;
-	}
-}
-
-void    ft_set_index_lst(t_node **ptr_first_node, int *tab_int, int tablen)
-{
-    int i;
-    t_node  *current_node;
-
-    i = 0;
-    current_node = *ptr_first_node;
-    while (i < tablen)
-    {
-        current_node = *ptr_first_node;
-        while (current_node != NULL)
-        {
-            if (current_node->value == tab_int[i])
-            {
-                current_node->ind = i;
-            }
-            current_node = current_node->next;
-        }
-        i++;
-    }
-}
 
 int main(int argc, char *argv[])
 {
@@ -158,6 +114,12 @@ int main(int argc, char *argv[])
     {
         ft_sort_four(ptr_first_node_a, ptr_first_node_b);
     }
+    else if (tablen == 5)
+    {
+        ft_sort_five(ptr_first_node_a, ptr_first_node_b);
+    }
+
+	
     
 
     //ft_display_lst(ptr_first_node_a, "Liste A :");

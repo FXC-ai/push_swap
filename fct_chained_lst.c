@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:25:18 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/01 16:42:22 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:26:00 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -448,13 +448,102 @@ void    ft_sort_four(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
     }
 }
 
+void	ft_sort_int_tab(int *tab, int size)
+{
+	int	i;
+	int	c;
+	int	check;
+
+	check = 0;
+	while (check < size)
+	{
+		i = 0;
+		while (i < (size - 1))
+		{
+			if (tab[i] > tab[i + 1])
+			{
+				c = tab[i];
+				tab[i] = tab[i + 1];
+				tab[i + 1] = c;
+			}	
+			i++;
+		}
+		check++;
+	}
+}
+
+void    ft_set_index_lst(t_node **ptr_first_node, int *tab_int, int tablen)
+{
+    int i;
+    t_node  *current_node;
+
+    i = 0;
+    current_node = *ptr_first_node;
+    while (i < tablen)
+    {
+        current_node = *ptr_first_node;
+        while (current_node != NULL)
+        {
+            if (current_node->value == tab_int[i])
+            {
+                current_node->ind = (i + 1);
+            }
+            current_node = current_node->next;
+        }
+        i++;
+    }
+}
+
+void    ft_sort_five(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
+{
+    int pos_5;
+    t_node *current_node;
+    (void) ptr_first_node_b;
+
+    pos_5 = 0;
+    current_node = *ptr_first_node_a;
+    if (ft_check_is_sorted(ptr_first_node_a) == 0)
+    {
+        while (current_node->ind != 5)
+        {
+            pos_5++;
+            current_node = current_node->next;
+        }
+        pos_5 = 4 - pos_5;
+        if (pos_5 <= 2)
+        {
+            while (pos_5 > 0)
+            {
+                ft_rotate_a(ptr_first_node_a);
+                pos_5--;
+            }
+            ft_push_b(ptr_first_node_a, ptr_first_node_b);
+            ft_sort_four(ptr_first_node_a, ptr_first_node_b);
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+            ft_rotate_a(ptr_first_node_a);
+        }
+        else
+        {
+            pos_5 = 5 - pos_5;
+            while (pos_5 > 0)
+            {
+                ft_reverse_rotate_a(ptr_first_node_a);
+                pos_5--;
+            }
+            ft_push_b(ptr_first_node_a, ptr_first_node_b);
+            ft_sort_four(ptr_first_node_a, ptr_first_node_b);
+            ft_push_a(ptr_first_node_a, ptr_first_node_b);
+            ft_rotate_a(ptr_first_node_a);
+        }
+    }
+}
 /*
 int main()
 {
 
     int     tablen;
-    int     tab_int[4] = {45, -89, -887, 2};
-    tablen = 4;
+    int     tab_int[5] = {-5, -4, 0, -2, -3};
+    tablen = 5;
 
     t_node *first_node_a = NULL;
     t_node **ptr_first_node_a = &first_node_a;
@@ -463,18 +552,20 @@ int main()
     t_node **ptr_first_node_b = &first_node_b;
     
     first_node_a = ft_create_lst(tab_int, tablen);
-    first_node_b = ft_create_lst(tab_int, tablen);
+
+    ft_sort_int_tab(tab_int, tablen);
+    ft_set_index_lst(ptr_first_node_a, tab_int, tablen);
+
+    
+    ft_sort_five(ptr_first_node_a, ptr_first_node_b);
 
     ft_display_lst(ptr_first_node_a, "LISTE A");
-    ft_display_lst(ptr_first_node_b, "LISTE B");
 
-    ft_push_b(ptr_first_node_a, ptr_first_node_b);
 
-    ft_display_lst(ptr_first_node_a, "LISTE A");
-    ft_display_lst(ptr_first_node_b, "LISTE B");
     
     ft_destruct_lst(ptr_first_node_a);
     ft_destruct_lst(ptr_first_node_b);
 
     return 0;
-}*/
+}
+*/
