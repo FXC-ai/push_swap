@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:25:18 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/01 22:05:15 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:17:08 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -538,34 +538,114 @@ void    ft_sort_five(t_node **ptr_first_node_a, t_node **ptr_first_node_b)
     }
 }
 
-int ft_srch_from_bottom(t_node **ptr_first_node, int ind_min, int ind_max)
+int ft_find_max_chunk(int size_stack, int nb_chunk, int id_chunk)
+{
+
+    int size_chunk;
+    int max;
+
+    size_chunk = size_stack / nb_chunk;
+    max = 0;
+    if (id_chunk == nb_chunk)
+    {
+        max = size_stack;
+    }
+    else
+    {
+        max = id_chunk * size_chunk;
+    }
+    return (max);
+}
+
+int ft_find_min_chunk(int size_stack, int nb_chunk, int id_chunk)
+{
+
+    int size_chunk;
+    int min;
+
+    size_chunk = size_stack / nb_chunk;
+    min = 0;
+    if (id_chunk == 1)
+    {
+        min = 1;
+    }
+    else
+    {
+        min = (id_chunk-1) * size_chunk + 1;
+    }
+    return (min);
+}
+
+
+int ft_srch_from_bottom_a(t_node **ptr_first_node, int ind_min, int ind_max)
+{
+    int     i;
+    t_node  *current_node;
+    
+    i = 1;
+    current_node = *ptr_first_node;
+    if (current_node != NULL && ind_min < ind_max)
+    {
+        while (current_node != NULL)
+        {
+            if (current_node->ind >= ind_min && current_node->ind <= ind_max)
+            {
+                return (i);
+            }
+            i++;
+            current_node = current_node->next;
+        }
+    }
+    return (-1);
+}
+
+int ft_srch_from_top_a(t_node **ptr_first_node, int ind_min, int ind_max)
 {
     int     i;
     t_node  *current_node;
     
     i = 0;
-    current_node = *ptr_first_node;
-    while (current_node != NULL)
+    current_node = ft_last_node(ptr_first_node);
+    if (current_node != NULL && ind_min < ind_max)
     {
-        if (current_node->ind >= ind_min && current_node->ind <= ind_max)
+        while (current_node != NULL)
         {
-            return (i);
+            if (current_node->ind >= ind_min && current_node->ind <= ind_max)
+            {
+                return (i);
+            }
+            i++;
+            current_node = current_node->previous;
         }
-        i++;
-        current_node = current_node->next;
     }
     return (-1);
 }
+/*
+int ft_find_from_bottom_b (t_node **ptr_first_node_b, int min_chunk, int max_chunk, int ind)
+{
 
+    if ()
+    {
+        
+    }
+    
 
+}
+*/
 /*
 int main()
 {
 
     int     tablen;
-    int     tab_int[10] = {1,2,3,4,5,6,7,8,9,10};
+    int     tab_int[10] = {10,9,2,1,6,7,4,8,3,5};
+    int     nb_chunk;
+    int     min_chunk;
+    int     max_chunk;
+    int     nb_rotate;
+    int     nb_rev_rotate;
+    
     tablen = 10;
-
+    nb_chunk = 2;
     t_node *first_node_a = NULL;
     t_node **ptr_first_node_a = &first_node_a;
 
@@ -577,14 +657,49 @@ int main()
     ft_sort_int_tab(tab_int, tablen);
     ft_set_index_lst(ptr_first_node_a, tab_int, tablen);
 
+    min_chunk = ft_find_min_chunk(tablen, nb_chunk, 1);
+    max_chunk = ft_find_max_chunk(tablen, nb_chunk, 1);
+
+    nb_rotate = ft_srch_from_top_a(ptr_first_node_a, min_chunk, max_chunk);
+    nb_rev_rotate = ft_srch_from_bottom_a(ptr_first_node_a, min_chunk, max_chunk);
     
+    printf("\nmin_chunk = %d, max_chunk = %d, nb_rotate = %d, nb_rev_rotate = %d\n\n",
+            min_chunk, max_chunk, nb_rotate, nb_rev_rotate);
 
     ft_display_lst(ptr_first_node_a, "LISTE A");
 
-    ft_srch_from_bottom(ptr_first_node_a, 10, 40);
+    if (nb_rotate <= nb_rev_rotate)
+    {
+        while (nb_rotate > 0)
+        {
+            ft_rotate_a(ptr_first_node_a);
+            nb_rotate--;
+        }
+    }
+    else
+    {
+        while (nb_rev_rotate > 0)
+        {
+            ft_reverse_rotate_a(ptr_first_node_a);
+            nb_rev_rotate--;
+        }
+    }
+    
+    //ft_push_b(ptr_first_node_a,ptr_first_node_b);
+
+    ft_display_lst(ptr_first_node_a, "LISTE A");
+    ft_display_lst(ptr_first_node_b, "LISTE B");
+
+
+
+
+
+    //printf("\nind from bottom = %d\n", ft_srch_from_bottom(ptr_first_node_a, 5, 9));
+    //printf("\nind from top    = %d\n", ft_srch_from_top(ptr_first_node_a, 5, 9));
     
     ft_destruct_lst(ptr_first_node_a);
     ft_destruct_lst(ptr_first_node_b);
 
     return 0;
-}*/
+}
+*/

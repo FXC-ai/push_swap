@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:16:37 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/01 21:51:04 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/02 09:53:24 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,6 @@ int ft_find_min_chunk(int size_stack, int nb_chunk, int id_chunk)
         min = (id_chunk-1) * size_chunk + 1;
     }
     return (min);
-}
-
-int ft_search_top(t_node **ptr_first_node, int ind)
-{
-    int     i;
-    t_node  *current_node;
-    
-    i = 0;
-    current_node = *ptr_first_node;
-    while (current_node != NULL)
-    {
-        if (current_node->ind == ind)
-        {
-            return (i);
-        }
-        i++;
-        current_node = current_node->next;
-    }
 }
 
 
