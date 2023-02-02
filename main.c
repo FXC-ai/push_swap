@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:19:41 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/02 14:03:15 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:45:39 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        nb_chunk = 11;
+        nb_chunk = 5;
 
         
         //printf("\nmin_chunk = %d, max_chunk = %d, nb_rotate = %d, nb_rev_rotate = %d\n\n",
@@ -142,6 +142,17 @@ int main(int argc, char *argv[])
             i = 0;
             while (i <= (max_chunk - min_chunk))
             {
+
+
+                
+                /*
+                if ((ft_last_node(ptr_first_node_a))->ind < (ft_last_node(ptr_first_node_a)->previous)->ind)
+                {
+                    ft_swap_a(ptr_first_node_a);
+                }
+                */
+
+
                 nb_rotate = ft_srch_from_top_a(ptr_first_node_a, min_chunk, max_chunk);
                 nb_rev_rotate = ft_srch_from_bottom_a(ptr_first_node_a, min_chunk, max_chunk);
                 //printf("\ni = %d, min_chunk = %d, max_chunk = %d, nb_rotate = %d, nb_rev_rotate = %d\n\n",
