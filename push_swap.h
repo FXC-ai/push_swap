@@ -13,12 +13,17 @@ typedef struct s_node
 	struct s_node	*next;
 } t_node;
 
-//fct_args_management
+//args_management00
+char    *ft_join_args(int argc, char *argv[]);
+char    **ft_create_tab_char(int argc, char *argv[]);
+int		ft_size_table(char **tab_char);
+
+
+
+
 int		ft_check_number(char *str);
 int		ft_check_args_number(char **tab_char, int tablen);
-char    *ft_join_args(int argc, char *argv[]);
 void	ft_free_tab_char(char **tab, int tablen);
-int		ft_size_table(char **tab_char);
 long 	*ft_create_tab_long(char **tab_char, int tablen);
 int		ft_check_args_int(char **tab_char, long *tab_long, int tablen);
 int		ft_check_args_double(char **tab_char, long *tab_long, int tablen);
@@ -65,5 +70,20 @@ int ft_srch_from_top_a(t_node **ptr_first_node, int ind_min, int ind_max);
 
 int ft_srch_from_bottom_b(t_node **ptr_first_node, int ind_value);
 int ft_srch_from_top_b(t_node **ptr_first_node, int ind_value);
+
+
+
+
+int ft_calculate_nb_chunk(int tablen);
+
+void    ft_cor_al2(t_node **ptr_first_node_a, t_node **ptr_first_node_b, int i);
+void    ft_st2(t_node **ptr_first_node_a, t_node **ptr_first_node_b, int tablen);
+void    ft_cor_al1(t_node **ptr_first_a, t_node **ptr_first_b, int min, int max);
+void    ft_st1(t_node **ptr_first_a, t_node **ptr_first_b, int min, int max);
+void    ft_st(t_node **ptr_first_node_a, t_node **ptr_first_node_b, int tablen);
+
+void    ft_choose_algo(t_node **ptr_first_a, t_node **ptr_first_b, int tablen);
+int    ft_launch_algo(int *tab_int, int tablen);
+int ft_check_int_double(char **tab_char, long *tab_long, int tablen);
 
 #endif

@@ -1,6 +1,6 @@
 HEADIR  = includes
 
-SRCS 	= args_management.c fct_chained_lst.c main.c
+SRCS 	= args_management_00.c args_management_01.c args_management_02.c fct_chained_lst.c fct_chained_lst_00.c main.c
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -23,11 +23,11 @@ ${NAME}:	${OBJS}
 all:		${NAME}
 
 clean:		
-			make clean -C ft_printf
+			make clean -C libft
 			${RM} ${OBJS}
 
 fclean:		clean
-			make fclean -C ft_printf
+			make fclean -C libft
 			${RM} ${NAME}
 
 re:			fclean all
