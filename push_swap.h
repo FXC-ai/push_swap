@@ -20,8 +20,8 @@ char    *ft_join_args(int argc, char *argv[]);
 void	ft_free_tab_char(char **tab, int tablen);
 int		ft_size_table(char **tab_char);
 long 	*ft_create_tab_long(char **tab_char, int tablen);
-int		ft_check_args_int(long *tab_long, int tablen);
-int		ft_check_args_double(long *tab_long, int tablen);
+int		ft_check_args_int(char **tab_char, long *tab_long, int tablen);
+int		ft_check_args_double(char **tab_char, long *tab_long, int tablen);
 
 
 //fct_chained_lst

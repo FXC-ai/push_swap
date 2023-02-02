@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:16:14 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/01/29 18:30:00 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:26:49 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int ft_check_args_number(char **tab_char, int tablen)
 	{
 		if (ft_check_number(tab_char[i]) == 0)
 		{
+			write(2,"Error\n",6);
+			ft_free_tab_char(tab_char, tablen);
 			return (0);
 		}
 		i++;
@@ -118,7 +120,7 @@ long  *ft_create_tab_long(char **tab_char, int tablen)
 	return  tab_long;
 }
 
-int ft_check_args_int(long *tab_long, int tablen)
+int ft_check_args_int(char **tab_char, long *tab_long, int tablen)
 {
 	int i;
 
@@ -127,6 +129,9 @@ int ft_check_args_int(long *tab_long, int tablen)
 	{
 		if (tab_long[i] > INT_MAX || tab_long[i] < INT_MIN)
 		{
+			ft_free_tab_char(tab_char, tablen);
+        	free(tab_long);
+			write(2,"Error\n",6);
 			return (0);
 		}
 		i++;
@@ -134,7 +139,7 @@ int ft_check_args_int(long *tab_long, int tablen)
 	return (1);
 }
 
-int ft_check_args_double(long *tab_long, int tablen)
+int ft_check_args_double(char **tab_char, long *tab_long, int tablen)
 {
 	int i;
 	int j;
@@ -147,6 +152,9 @@ int ft_check_args_double(long *tab_long, int tablen)
 		{
 			if (tab_long[i] == tab_long[j])
 			{
+				write(2,"Error\n",6);
+        		ft_free_tab_char(tab_char, tablen);
+        		free(tab_long);
 				return (0);
 			}
 			j++;
