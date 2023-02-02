@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:25:18 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/02 11:17:08 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/02 13:57:46 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -620,18 +620,78 @@ int ft_srch_from_top_a(t_node **ptr_first_node, int ind_min, int ind_max)
     }
     return (-1);
 }
-/*
-int ft_find_from_bottom_b (t_node **ptr_first_node_b, int min_chunk, int max_chunk, int ind)
+
+int ft_srch_from_bottom_b(t_node **ptr_first_node, int ind_value)
 {
-
-    if ()
-    {
-        
-    }
+    int     i;
+    t_node  *current_node;
     
-
+    i = 1;
+    current_node = *ptr_first_node;
+    if (current_node != NULL && ind_value > 0)
+    {
+        while (current_node != NULL)
+        {
+            if (current_node->ind == ind_value)
+            {
+                return (i);
+            }
+            i++;
+            current_node = current_node->next;
+        }
+    }
+    printf("\nIl y a un pb avec ft_srch_from_bottom_b\n");
+    return (-1);
 }
-*/
+
+int ft_srch_from_top_b(t_node **ptr_first_node, int ind_value)
+{
+    int     i;
+    t_node  *current_node;
+    
+    i = 0;
+    current_node = ft_last_node(ptr_first_node);
+    if (current_node != NULL && ind_value > 0)
+    {
+        while (current_node != NULL)
+        {
+            if (current_node->ind == ind_value)
+            {
+                return (i);
+            }
+            i++;
+            current_node = current_node->previous;
+        }
+    }
+    printf("Il y a un pb avec ft_srch_from_bottom_b\n");
+    return (-1);
+}
+
+/*
+int ft_srch_value_bottom_b(t_node **ptr_first_node_a, int ind_to_find)
+{
+    int     i;
+    t_node  *current_node;
+    
+    i = 1;
+    current_node = *ptr_first_node;
+    if (current_node != NULL && ind_min < ind_max)
+    {
+        while (current_node != NULL)
+        {
+            if (current_node->ind >= ind_min && current_node->ind <= ind_max)
+            {
+                return (i);
+            }
+            i++;
+            current_node = current_node->next;
+        }
+    }
+    return (-1);
+
+
+}*/
+
 /*
 int main()
 {

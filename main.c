@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:19:41 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/02 11:40:10 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:03:15 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
     int nb_rotate;
     int nb_rev_rotate;
     int i;
+    int id_chunk;
 
     tab_int = NULL;
     args = NULL;
@@ -125,39 +126,87 @@ int main(int argc, char *argv[])
     }
     else
     {
-        nb_chunk = 2;
-        min_chunk = ft_find_min_chunk(tablen, nb_chunk, 1);
-        max_chunk = ft_find_max_chunk(tablen, nb_chunk, 1);
+        nb_chunk = 11;
 
-        nb_rotate = ft_srch_from_top_a(ptr_first_node_a, min_chunk, max_chunk);
-        nb_rev_rotate = ft_srch_from_bottom_a(ptr_first_node_a, min_chunk, max_chunk);
         
-        printf("\nmin_chunk = %d, max_chunk = %d, nb_rotate = %d, nb_rev_rotate = %d\n\n",
-                min_chunk, max_chunk, nb_rotate, nb_rev_rotate);
+        //printf("\nmin_chunk = %d, max_chunk = %d, nb_rotate = %d, nb_rev_rotate = %d\n\n",
+        //        min_chunk, max_chunk, nb_rotate, nb_rev_rotate);
 
-        printf("\n\n");
+        //printf("\ndif = %d\n", max_chunk - min_chunk);
         //ft_display_lst(ptr_first_node_a, "LISTE A");
-
-        
-        if (nb_rotate <= nb_rev_rotate)
+        id_chunk = 1;
+        while (id_chunk <= nb_chunk)
         {
-            while (nb_rotate > 0)
+            min_chunk = ft_find_min_chunk(tablen, nb_chunk, id_chunk);
+            max_chunk = ft_find_max_chunk(tablen, nb_chunk, id_chunk);
+            i = 0;
+            while (i <= (max_chunk - min_chunk))
             {
-                ft_rotate_a(ptr_first_node_a);
-                nb_rotate--;
+                nb_rotate = ft_srch_from_top_a(ptr_first_node_a, min_chunk, max_chunk);
+                nb_rev_rotate = ft_srch_from_bottom_a(ptr_first_node_a, min_chunk, max_chunk);
+                //printf("\ni = %d, min_chunk = %d, max_chunk = %d, nb_rotate = %d, nb_rev_rotate = %d\n\n",
+                //i, min_chunk, max_chunk, nb_rotate, nb_rev_rotate);
+                
+                
+                if (nb_rotate != -1 && nb_rev_rotate != -1)
+                {
+                    if (nb_rotate <= nb_rev_rotate)
+                    {
+                        while (nb_rotate > 0)
+                        {
+                            ft_rotate_a(ptr_first_node_a);
+                            nb_rotate--;
+                        }
+                    }
+                    else
+                    {
+                        while (nb_rev_rotate > 0)
+                        {
+                            ft_reverse_rotate_a(ptr_first_node_a);
+                            nb_rev_rotate--;
+                        }
+                    }
+                    ft_push_b(ptr_first_node_a,ptr_first_node_b);
+                }
+                i++;
             }
+            id_chunk++;
         }
-        else
+
+        i = tablen;
+        nb_rotate = 0;
+        nb_rev_rotate = 0;
+        while (i > 0)
         {
-            while (nb_rev_rotate > 0)
+            nb_rev_rotate = ft_srch_from_bottom_b(ptr_first_node_b, i);
+            nb_rotate = ft_srch_from_top_b(ptr_first_node_b, i);
+            //printf("i = %d | nb_rev_rotate = %d | nb_rotate = %d\n", i,nb_rev_rotate, nb_rotate);
+            
+            if (nb_rotate != -1 && nb_rev_rotate != -1)
             {
-                ft_reverse_rotate_a(ptr_first_node_a);
-                nb_rev_rotate--;
+                if (nb_rotate <= nb_rev_rotate)
+                {
+                    while (nb_rotate > 0)
+                    {
+                        ft_rotate_b(ptr_first_node_b);
+                        nb_rotate--;
+                    
+                    }
+                }
+                else
+                {
+                    while (nb_rev_rotate > 0)
+                    {
+                        ft_reverse_rotate_b(ptr_first_node_b);
+                        nb_rev_rotate--;
+                    }
+                }
+                ft_push_a(ptr_first_node_a, ptr_first_node_b);
             }
+            i--;
         }
         
-        ft_push_b(ptr_first_node_a,ptr_first_node_b);
-
+        
         //ft_display_lst(ptr_first_node_a, "LISTE A");
         //ft_display_lst(ptr_first_node_b, "LISTE B");
 

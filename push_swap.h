@@ -63,4 +63,7 @@ int ft_find_min_chunk(int size_stack, int nb_chunk, int id_chunk);
 int ft_srch_from_bottom_a(t_node **ptr_first_node, int ind_min, int ind_max);
 int ft_srch_from_top_a(t_node **ptr_first_node, int ind_min, int ind_max);
 
+int ft_srch_from_bottom_b(t_node **ptr_first_node, int ind_value);
+int ft_srch_from_top_b(t_node **ptr_first_node, int ind_value);
+
 #endif
