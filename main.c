@@ -6,13 +6,32 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:19:41 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/02 14:45:39 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:56:41 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
+int ft_calculate_nb_chunk(int tablen)
+{
+    if (tablen > 5 && tablen < 21)
+    {
+        return (2);
+    }
+    if (tablen == 100)
+    {
+        return (5);
+    }
+    else if (tablen == 500)
+    {
+        return (12);
+    }
+    else
+    {
+        return (((tablen * 7) / 400) + 3);
+    }
+    
+}
 
 int main(int argc, char *argv[])
 {
@@ -126,7 +145,8 @@ int main(int argc, char *argv[])
     }
     else
     {
-        nb_chunk = 5;
+        nb_chunk = ft_calculate_nb_chunk(tablen);
+        //printf("nb_chunk = %d\n", nb_chunk);
 
         
         //printf("\nmin_chunk = %d, max_chunk = %d, nb_rotate = %d, nb_rev_rotate = %d\n\n",
