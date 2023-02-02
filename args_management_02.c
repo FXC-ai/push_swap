@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_management.c                                  :+:      :+:    :+:   */
+/*   args_management_02.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:16:14 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/02 20:13:28 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:51:03 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,28 @@ int *ft_convert_longtoint(long *tab_long, int tablen)
     }
     free(tab_long);
     return (tab_int);
+}
+
+void	ft_sort_int_tab(int *tab, int size)
+{
+	int	i;
+	int	c;
+	int	check;
+
+	check = 0;
+	while (check < size)
+	{
+		i = 0;
+		while (i < (size - 1))
+		{
+			if (tab[i] > tab[i + 1])
+			{
+				c = tab[i];
+				tab[i] = tab[i + 1];
+				tab[i + 1] = c;
+			}	
+			i++;
+		}
+		check++;
+	}
 }
