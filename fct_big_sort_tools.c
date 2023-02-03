@@ -6,19 +6,19 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 15:25:18 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/03 12:31:04 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/02/03 14:49:45 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_srch_from_bottom_a(t_node **ptr_first_node, int ind_min, int ind_max)
+int	ft_srch_from_bottom_a(t_node **ptr_first_nod, int ind_min, int ind_max)
 {
 	int		i;
 	t_node	*current_node;
 
 	i = 1;
-	current_node = *ptr_first_node;
+	current_node = *ptr_first_nod;
 	if (current_node != NULL && ind_min < ind_max)
 	{
 		while (current_node != NULL)
