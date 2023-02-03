@@ -38,10 +38,10 @@ void	ft_display_node(t_node	*node);
 void	ft_display_lst(t_node **first_node, char *name);
 void	ft_destruct_node(t_node *node);
 void	ft_destruct_lst(t_node **ptr_first_node);
-t_node    *ft_lst_del_last(t_node **ptr_first_node);
+t_node	*ft_lst_del_last(t_node **ptr_first_node);
 t_node  *ft_lst_del_first(t_node **ptr_first_node);
 void	ft_add_node_front(t_node **ptr_first_node, t_node *node);
-int ft_size_lst(t_node **ptr_first_node);
+int		ft_size_lst(t_node **ptr_first_node);
 
 void	ft_swap_a(t_node **ptr_first_node_a);
 void	ft_swap_b(t_node **ptr_first_node_b);
@@ -49,11 +49,11 @@ void	ft_rotate_a(t_node **ptr_first_node_a);
 void	ft_rotate_b(t_node **ptr_first_node_b);
 void	ft_reverse_rotate_a(t_node **ptr_first_node_a);
 void	ft_reverse_rotate_b(t_node **ptr_first_node_b);
-void ft_push_b(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
-void ft_push_a(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
+void	ft_push_b(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
+void	ft_push_a(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
 
-int *ft_convert_longtoint(long *tab_long, int tablen);
-int ft_check_is_sorted(t_node **ptr_first_node);
+int		*ft_convert_longtoint(long *tab_long, int tablen);
+int		ft_check_is_sorted(t_node **ptr_first_node);
 
 void    ft_sort_two(t_node **ptr_first_node);
 void    ft_sort_three(t_node **ptr_first_node_a);
@@ -63,18 +63,18 @@ void    ft_sort_five(t_node **ptr_first_node_a, t_node **ptr_first_node_b);
 void	ft_sort_int_tab(int *tab, int size);
 void    ft_set_index_lst(t_node **ptr_first_node, int *tab_int, int tablen);
 
-int ft_find_max_chunk(int size_stack, int nb_chunk, int id_chunk);
-int ft_find_min_chunk(int size_stack, int nb_chunk, int id_chunk);
-int ft_srch_from_bottom_a(t_node **ptr_first_node, int ind_min, int ind_max);
-int ft_srch_from_top_a(t_node **ptr_first_node, int ind_min, int ind_max);
+int		ft_find_max_chunk(int size_stack, int nb_chunk, int id_chunk);
+int		ft_find_min_chunk(int size_stack, int nb_chunk, int id_chunk);
+int		ft_srch_from_bottom_a(t_node **ptr_first_node, int ind_min, int ind_max);
+int		ft_srch_from_top_a(t_node **ptr_first_node, int ind_min, int ind_max);
 
-int ft_srch_from_bottom_b(t_node **ptr_first_node, int ind_value);
-int ft_srch_from_top_b(t_node **ptr_first_node, int ind_value);
-
-
+int		ft_srch_from_bottom_b(t_node **ptr_first_node, int ind_value);
+int		ft_srch_from_top_b(t_node **ptr_first_node, int ind_value);
 
 
-int ft_calculate_nb_chunk(int tablen);
+
+
+int		ft_calculate_nb_chunk(int tablen);
 
 void    ft_cor_al2(t_node **ptr_first_node_a, t_node **ptr_first_node_b, int i);
 void    ft_st2(t_node **ptr_first_node_a, t_node **ptr_first_node_b, int tablen);
