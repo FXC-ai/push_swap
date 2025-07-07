@@ -6,7 +6,7 @@
 
 Il y a des avantages et des inconvénients dans les 2 cas, en voici un bref récapitulatif.
 
-![tableauVSListes.png](Push_Swap%206ce6c67f52c447ccb198c0d19ab1cad3/tableauVSListes.png)
+![tableauVSListes.png](tableauVSListes.png)
 
 ## A propos des testeurs
 
