@@ -28,7 +28,7 @@ La liste est loin d’être exhaustive !!!
 
 ## Représentation des listes chaînées en mémoire
 
-![Lstchainnees_repr.jpg](Push_Swap%206ce6c67f52c447ccb198c0d19ab1cad3/Lstchainnees_repr.jpg)
+![Lstchainnees_repr.jpg](Lstchainnees_repr.jpg)
 
 # La gestion des arguments passés en paramètre
 
@@ -287,7 +287,7 @@ void	ft_sort_int_tab(int *tab, int size)
 
 Pour cela il n’ y a aps de miracle il faut hard coder les 5 situations. La sixième n’est pas nécessaire car c’est le cas ou les 3 éléments sont déjà triés. La correction impose de le faire en mois de 3 actions.
 
-![1 D0U1zQFQnkI4Q_Z0QPi69g.webp](Push_Swap%206ce6c67f52c447ccb198c0d19ab1cad3/1_D0U1zQFQnkI4Q_Z0QPi69g.webp)
+![1 D0U1zQFQnkI4Q_Z0QPi69g.webp](1_D0U1zQFQnkI4Q_Z0QPi69g.webp)
 
 ## Trier 4 éléments
 
