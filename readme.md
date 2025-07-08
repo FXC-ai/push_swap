@@ -285,7 +285,7 @@ void	ft_sort_int_tab(int *tab, int size)
 
 ## Trier 3 éléments
 
-Pour cela il n’ y a aps de miracle il faut hard coder les 5 situations. La sixième n’est pas nécessaire car c’est le cas ou les 3 éléments sont déjà triés. La correction impose de le faire en mois de 3 actions.
+Pour cela il n’ y a aps de miracle il faut hard coder les 5 situations. La sixième n’est pas nécessaire car c’est le cas ou les 3 éléments sont déjà triés. La correction impose de le faire en moins de 3 actions.
 
 ![1 D0U1zQFQnkI4Q_Z0QPi69g.webp](1_D0U1zQFQnkI4Q_Z0QPi69g.webp)
 
