@@ -307,10 +307,6 @@ Je fais exactement de la même façon pour trier 4 éléments. La seule différe
 
 Cela assure de le faire en 12 maximum comme l’impose la correction.
 
-# Algorithme pour les listes de plus de 5 éléments
-
-A suivre…
-
 # Exigences de la correction
 
 La correction impose d’avoir un algorithme raisonnablement efficace pour accepter le projet. Voici les barèmes :
